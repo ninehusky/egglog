@@ -40,7 +40,7 @@ use thiserror::Error;
 use generic_symbolic_expressions::Sexp;
 
 use ast::*;
-pub use typechecking::{TypeInfo, UNIT_SYM};
+pub use typechecking::{TypeError, TypeInfo, UNIT_SYM};
 
 use crate::core::{AtomTerm, ResolvedCall};
 use actions::Program;
@@ -67,7 +67,6 @@ use unionfind::*;
 use util::*;
 
 use crate::constraint::Problem;
-use crate::typechecking::TypeError;
 
 pub type Subst = IndexMap<Symbol, Value>;
 
@@ -434,7 +433,7 @@ pub struct EGraph {
     pub run_mode: RunMode,
     pub fact_directory: Option<PathBuf>,
     pub seminaive: bool,
-    type_info: TypeInfo,
+    pub type_info: TypeInfo,
     extract_report: Option<ExtractReport>,
     /// The run report for the most recent run of a schedule.
     recent_run_report: Option<RunReport>,
